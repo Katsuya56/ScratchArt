@@ -4,13 +4,11 @@ from PIL import Image
 
 # グラデーション画像を生成するための関数
 
-
 def get_gradient_2d(start, stop, width, height, is_horizontal):
     if is_horizontal:
         return np.tile(np.linspace(start, stop, width), (height, 1))
     else:
         return np.tile(np.linspace(start, stop, height), (width, 1)).T
-
 
 def get_gradient_3d(width, height, start_list, stop_list, is_horizontal_list):
     result = np.zeros((height, width, len(start_list)), dtype=np.float64)
@@ -20,7 +18,6 @@ def get_gradient_3d(width, height, start_list, stop_list, is_horizontal_list):
             start, stop, width, height, is_horizontal)
 
     return result
-
 
 threshold = 100    # 閾値
 
@@ -47,10 +44,10 @@ ret, threshold_image = cv2.threshold(
 cv2.imwrite(black_white_imagepath, threshold_image)
 
 # グラデーションの生成
-gradient = get_gradient_3d(width, height, (0, 0, 192),
+gradient_RGB = get_gradient_3d(width, height, (0, 0, 192),
                            (255, 255, 64), (False, False, True))
 # グラデーション画像の保存
-cv2.imwrite(gradient_image_path, gradient)
+cv2.imwrite(gradient_image_path, gradient_RGB)
 
 # 白黒画像とグラデーション画像の合成
 # 白黒画像の読み込み
@@ -58,9 +55,8 @@ img1_BGR = cv2.imread(black_white_imagepath)
 img1_RGB = cv2.cvtColor(img1_BGR, cv2.COLOR_BGR2RGB)
 # グラデーション画像の読み込み
 img2_BGR = cv2.imread(gradient_image_path)
-img2_RGB = cv2.cvtColor(img2_BGR, cv2.COLOR_BGR2RGB)
 
 # 画像の合成
 blended = cv2.addWeighted(src1=img1_RGB, alpha=0.7,
-                          src2=img2_RGB, beta=0.3, gamma=0)
+                          src2=img2_BGR, beta=0.3, gamma=0)
 cv2.imwrite(scratch_art_image_path, blended)
