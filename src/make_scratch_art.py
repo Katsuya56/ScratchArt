@@ -23,7 +23,7 @@ threshold = 100    # 閾値
 
 base_image_path = "image/1bace.jpg"
 black_white_imagepath = "image/2BW.jpg"
-black_white_imagepath = f"image/3BW{threshold}.jpg"
+threshold_imagepath = f"image/3BW{threshold}.jpg"
 gradient_image_path = "image/4gradient.jpg"
 scratch_art_image_path = "image/5scratch_art.jpg"
 
@@ -41,7 +41,7 @@ width = image_gray.shape[1]
 ret, threshold_image = cv2.threshold(
     image_gray, threshold, 255, cv2.THRESH_BINARY)
 # 白黒画像の保存
-cv2.imwrite(black_white_imagepath, threshold_image)
+cv2.imwrite(threshold_imagepath, threshold_image)
 
 # グラデーションの生成
 gradient_RGB = get_gradient_3d(width, height, (0, 0, 192),
@@ -51,7 +51,7 @@ cv2.imwrite(gradient_image_path, gradient_RGB)
 
 # 白黒画像とグラデーション画像の合成
 # 白黒画像の読み込み
-img1_BGR = cv2.imread(black_white_imagepath)
+img1_BGR = cv2.imread(threshold_imagepath)
 img1_RGB = cv2.cvtColor(img1_BGR, cv2.COLOR_BGR2RGB)
 # グラデーション画像の読み込み
 img2_BGR = cv2.imread(gradient_image_path)
