@@ -19,7 +19,7 @@ def get_gradient_3d(width, height, start_list, stop_list, is_horizontal_list):
 
     return result
 
-threshold = 100    # 閾値
+threshold = 110    # 閾値
 
 base_image_path = "image/1bace.jpg"
 black_white_imagepath = "image/2BW.jpg"
@@ -38,8 +38,8 @@ height = image_gray.shape[0]
 width = image_gray.shape[1]
 
 # 閾値を基準に白黒化
-ret, threshold_image = cv2.threshold(
-    image_gray, threshold, 255, cv2.THRESH_BINARY)
+ret, threshold_image = cv2.threshold(image_gray, threshold, 255, cv2.THRESH_BINARY)
+# ret, threshold_image = cv2.threshold(image_gray, threshold, 255, cv2.THRESH_BINARY_INV)
 # 白黒画像の保存
 cv2.imwrite(threshold_imagepath, threshold_image)
 
