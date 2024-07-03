@@ -2,7 +2,20 @@
 
 画像を読み込んでスクラッチアートを作成するプログラム
 
-# 処理手順
+# 環境構築方法
+1. 仮想環境を立てる
+    ```
+    python -m venv .venv
+    ```
+
+1. vscode上のPythonの拡張機能が、実行するPythonを仮想環境のものにするか聞いてくるのでYesを選択する
+
+1. ライブラリをインストールする
+    ```
+    pip install -r requirements.txt
+    ```
+
+# 処理順序
 
 1. ベースの画像を読み込む
 1. ベースの画像をグレースケール化
@@ -15,10 +28,13 @@
 requirements.txt
 
 ```text
-opencv-python
-Pillow
+numpy==2.0.0
+opencv-python==4.10.0.84
+pillow==10.4.0
 ```
 
-# 備考
-
-venvを使って仮想環境を立てています
+# 自分の環境
+- OS
+    windows11
+- Python
+    3.11.1
